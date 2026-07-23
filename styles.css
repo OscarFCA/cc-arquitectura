@@ -125,16 +125,49 @@ section{padding-block:var(--section-gap)}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--marfil);margin:5px 0;transition:.3s}
 .nav.solid .nav-toggle span{background:var(--azul-profundo)}
 
+.nav-cta-mobile{display:none}
+
 @media(max-width:920px){
-  .nav-toggle{display:block;order:3}
+  .nav-toggle{display:block;position:relative;z-index:60;order:3}
+  .nav-logo{position:relative;z-index:60}
+  .nav-right{display:none}
+
+  /* ícono → X */
+  .nav-toggle span{transition:transform .3s ease, opacity .2s ease, background .3s ease}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* barra superior transparente y logo/aspas en claro cuando el menú está abierto */
+  .nav.menu-open{background:transparent;box-shadow:none}
+  .nav.menu-open .logo-dark{display:none}
+  .nav.menu-open .logo-light{display:block}
+  .nav.menu-open .nav-toggle span{background:var(--marfil)}
+
+  /* overlay a pantalla completa */
   .nav-links{
-    position:absolute;top:100%;right:0;left:0;flex-direction:column;gap:0;
-    background:var(--azul-profundo);padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease;
+    position:fixed;inset:0;z-index:55;margin:0;
+    flex-direction:column;justify-content:center;align-items:center;gap:.2rem;
+    background:var(--azul-profundo);
+    padding:96px 24px 40px;overflow:auto;max-height:none;
+    opacity:0;visibility:hidden;transform:translateY(-8px);
+    transition:opacity .38s ease, transform .38s ease, visibility .38s;
   }
-  .nav-links.open{max-height:70vh;padding:12px 0}
-  .nav-links a{color:var(--marfil)!important;padding:16px var(--gutter);width:100%}
-  .nav-links li{border-top:1px solid rgba(198,166,107,.2)}
-  .nav-right .btn{display:none}
+  .nav-links.open{opacity:1;visibility:visible;transform:none}
+  .nav-links li{border:0;width:auto;text-align:center}
+  .nav-links a:not(.btn){
+    display:inline-block;color:var(--marfil);
+    font-family:var(--serif);font-weight:400;text-transform:none;
+    font-size:clamp(1.7rem,7vw,2.2rem);letter-spacing:.01em;padding:.5rem 1rem;
+    transition:color .2s ease;
+  }
+  .nav-links a:not(.btn):hover,.nav-links a:not(.btn):focus-visible{color:var(--dorado)}
+  .nav-cta-mobile{display:block;margin-top:1.9rem}
+  .nav-cta-mobile .btn{font-size:.82rem;padding:1.05em 2.3em}
+  .nav-links .nav-tel{
+    margin-top:1.4rem;color:var(--piedra);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .nav-links .nav-tel a{color:var(--dorado)}
 }
 
 /* ---------- HERO ---------- */

@@ -16,15 +16,27 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Menú móvil
+  // Menú móvil (overlay a pantalla completa)
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
-  if (toggle && links) {
+  if (toggle && links && nav) {
+    toggle.setAttribute('aria-expanded', 'false');
+    function setMenu(open) {
+      links.classList.toggle('open', open);
+      toggle.classList.toggle('open', open);
+      nav.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
     toggle.addEventListener('click', function () {
-      links.classList.toggle('open');
+      setMenu(!links.classList.contains('open'));
     });
     links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { links.classList.remove('open'); });
+      a.addEventListener('click', function () { setMenu(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && links.classList.contains('open')) setMenu(false);
     });
   }
 
