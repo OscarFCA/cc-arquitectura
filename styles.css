@@ -212,6 +212,19 @@ section{padding-block:var(--section-gap)}
 .program li::before{content:"◆";position:absolute;left:0;top:.55rem;color:var(--dorado);font-size:.6rem}
 @media(max-width:720px){.program{grid-template-columns:1fr;gap:34px}}
 
+/* Programa por columnas (imagen + lista de cada planta) */
+.program-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,72px);margin-top:2.6rem}
+.program-cols .col-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(198,166,107,.45);padding-bottom:.7rem;margin-bottom:1.3rem}
+.program-cols h3{color:var(--azul-profundo);font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.65rem);margin:0}
+.program-cols .col-head .tag{font-family:var(--sans);font-size:.66rem;text-transform:uppercase;letter-spacing:.2em;color:var(--dorado);white-space:nowrap}
+.program-cols figure{margin:0 0 1.4rem;overflow:hidden;border:1px solid rgba(198,166,107,.35);aspect-ratio:5/4}
+.program-cols figure img{width:100%;height:100%;object-fit:cover;object-position:center 72%}
+.program-cols ul{list-style:none;margin:0;padding:0}
+.program-cols li{padding:.55rem 0 .55rem 1.5rem;position:relative;border-bottom:1px solid rgba(140,133,119,.22)}
+.program-cols li:last-child{border-bottom:0}
+.program-cols li::before{content:"◆";position:absolute;left:0;top:.62rem;color:var(--dorado);font-size:.62rem}
+@media(max-width:720px){.program-cols{grid-template-columns:1fr;gap:44px}}
+
 /* ---------- Proceso (pasos numerados) ---------- */
 .steps{counter-reset:step;display:grid;gap:1.6rem}
 .step{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:start;padding-bottom:1.6rem;border-bottom:1px solid rgba(140,133,119,.25)}
