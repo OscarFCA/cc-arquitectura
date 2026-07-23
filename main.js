@@ -28,6 +28,15 @@
     });
   }
 
+  // Hero video: reproducción más lenta y cinematográfica
+  var heroVideo = document.querySelector('.hero-media video');
+  if (heroVideo) {
+    var slow = function () { heroVideo.playbackRate = 0.5; };
+    slow();
+    heroVideo.addEventListener('loadedmetadata', slow);
+    heroVideo.addEventListener('play', slow);
+  }
+
   // FAQ acordeón
   document.querySelectorAll('.faq button').forEach(function (btn) {
     btn.addEventListener('click', function () {
