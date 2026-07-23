@@ -96,11 +96,12 @@ section{padding-block:var(--section-gap)}
 /* ---------- NAV ---------- */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  /* alinea el contenido del nav al mismo contenedor centrado del hero */
+  padding:22px max(var(--gutter), calc((100% - var(--maxw)) / 2 + var(--gutter)));
   transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
 }
-.nav.solid{background:var(--marfil);box-shadow:0 1px 0 rgba(11,29,52,.08);padding-block:12px}
+.nav.solid{background:var(--marfil);box-shadow:0 1px 0 rgba(11,29,52,.08);padding-top:14px;padding-bottom:14px}
 /* Logo de marca en el header: versión clara sobre el hero, azul al hacer scroll */
 .nav-logo{display:inline-flex;align-items:center}
 .nav-logo img{height:52px;width:auto;display:block}
