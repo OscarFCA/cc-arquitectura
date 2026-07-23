@@ -40,13 +40,38 @@
     });
   }
 
-  // Hero video: reproducción más lenta y cinematográfica
+  // Hero video: reproducción lenta + fallback a portada si el autoplay se bloquea (iOS/ahorro de batería)
   var heroVideo = document.querySelector('.hero-media video');
   if (heroVideo) {
-    var slow = function () { heroVideo.playbackRate = 0.7; };
-    slow();
-    heroVideo.addEventListener('loadedmetadata', slow);
-    heroVideo.addEventListener('play', slow);
+    heroVideo.muted = true;
+    heroVideo.setAttribute('muted', '');
+    heroVideo.playsInline = true;
+    var media = heroVideo.parentElement;
+    var poster = heroVideo.getAttribute('poster');
+    var fallback = null;
+    function showFallback() {
+      if (fallback || !poster) return;
+      fallback = document.createElement('img');
+      fallback.src = poster;
+      fallback.alt = '';
+      fallback.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0';
+      media.appendChild(fallback);
+    }
+    function hideFallback() { if (fallback) { fallback.remove(); fallback = null; } }
+    function attempt() {
+      heroVideo.playbackRate = 0.7;
+      var pr = heroVideo.play();
+      if (pr && pr.then) pr.then(hideFallback).catch(showFallback);
+    }
+    heroVideo.addEventListener('loadeddata', attempt);
+    heroVideo.addEventListener('play', function () { heroVideo.playbackRate = 0.7; hideFallback(); });
+    attempt();
+    // reintentar al primer gesto del usuario (permite reproducir aun en modo de bajo consumo)
+    ['touchend', 'click', 'scroll'].forEach(function (ev) {
+      document.addEventListener(ev, function retry() {
+        if (heroVideo.paused) attempt();
+      }, { passive: true, once: false });
+    });
   }
 
   // FAQ acordeón
