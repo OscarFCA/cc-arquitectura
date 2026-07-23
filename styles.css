@@ -139,9 +139,10 @@ section{padding-block:var(--section-gap)}
 
 /* ---------- HERO ---------- */
 .hero{
-  position:relative;min-height:100svh;display:flex;align-items:flex-end;
+  position:relative;min-height:100svh;display:flex;align-items:center;
   color:var(--marfil);overflow:hidden;
   padding-top:clamp(96px,12vh,132px); /* reserva espacio bajo el header */
+  padding-bottom:clamp(40px,7vh,80px);
 }
 .hero-media{position:absolute;inset:0;z-index:0}
 .hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover}
@@ -164,7 +165,7 @@ section{padding-block:var(--section-gap)}
     rgba(11,29,52,.16) 50%,
     rgba(11,29,52,0) 64%);
 }
-.hero-inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(56px,10vh,110px)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
 .hero .eyebrow{color:var(--dorado);text-shadow:0 1px 12px rgba(11,29,52,.75)}
 .hero h1{font-size:clamp(1.9rem,4vw,3.2rem);color:#fff;max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.25)}
 .hero .lead{color:#eee;max-width:44ch;margin-top:1.4rem}
