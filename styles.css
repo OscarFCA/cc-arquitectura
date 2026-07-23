@@ -247,6 +247,38 @@ section{padding-block:var(--section-gap)}
   .gallery .g-big,.gallery .g-tall{grid-row:span 2;grid-column:span 2}
 }
 
+.gallery figure{cursor:pointer}
+
+/* ---------- Lightbox / carrusel de galería ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:100;background:rgba(9,18,32,.95);
+  display:none;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .28s ease;
+}
+.lightbox.open{display:flex;opacity:1}
+.lb-stage{position:relative;max-width:92vw;max-height:86vh;display:flex;align-items:center;justify-content:center}
+.lb-stage img{max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 24px 70px rgba(0,0,0,.55);background:var(--azul-profundo)}
+.lb-btn{
+  position:absolute;background:rgba(11,29,52,.35);border:1px solid rgba(198,166,107,.5);
+  color:var(--marfil);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s,border-color .2s;line-height:1;
+}
+.lb-btn:hover{background:var(--dorado);color:var(--azul-profundo);border-color:var(--dorado)}
+.lb-close{top:18px;right:20px;width:46px;height:46px;font-size:1.5rem;border-radius:2px}
+.lb-nav{top:50%;transform:translateY(-50%);width:52px;height:52px;font-size:1.7rem;border-radius:2px}
+.lb-prev{left:16px}
+.lb-next{right:16px}
+.lb-count{
+  position:absolute;bottom:22px;left:0;right:0;text-align:center;
+  color:var(--dorado);letter-spacing:.24em;font-size:.72rem;text-transform:uppercase;
+}
+@media(max-width:600px){
+  .lb-close{top:12px;right:12px;width:40px;height:40px}
+  .lb-nav{width:42px;height:42px;font-size:1.4rem}
+  .lb-prev{left:6px}.lb-next{right:6px}
+}
+@media(prefers-reduced-motion:reduce){.lightbox{transition:none}}
+
 /* ---------- Diferenciador (por qué elegirnos) ---------- */
 .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem 2.6rem;margin-top:2rem}
 .why .item{padding-left:1.6rem;position:relative}

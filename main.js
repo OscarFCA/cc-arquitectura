@@ -47,6 +47,67 @@
     });
   });
 
+  // Lightbox / carrusel de galería
+  var galImgs = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
+  if (galImgs.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Galería de imágenes');
+    lb.innerHTML =
+      '<button class="lb-btn lb-close" aria-label="Cerrar">&times;</button>' +
+      '<button class="lb-btn lb-nav lb-prev" aria-label="Anterior">&#8249;</button>' +
+      '<div class="lb-stage"><img alt=""></div>' +
+      '<button class="lb-btn lb-nav lb-next" aria-label="Siguiente">&#8250;</button>' +
+      '<div class="lb-count"></div>';
+    document.body.appendChild(lb);
+
+    var lbImg = lb.querySelector('.lb-stage img');
+    var lbCount = lb.querySelector('.lb-count');
+    var idx = 0;
+
+    function show(i) {
+      idx = (i + galImgs.length) % galImgs.length;
+      var src = galImgs[idx];
+      lbImg.src = src.currentSrc || src.src;
+      lbImg.alt = src.alt || '';
+      lbCount.textContent = (idx + 1) + ' / ' + galImgs.length;
+    }
+    function open(i) {
+      show(i);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    galImgs.forEach(function (img, i) {
+      img.parentElement.addEventListener('click', function () { open(i); });
+    });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-next').addEventListener('click', function () { show(idx + 1); });
+    lb.querySelector('.lb-prev').addEventListener('click', function () { show(idx - 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') show(idx + 1);
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+    });
+    // Swipe táctil
+    var x0 = null;
+    lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 45) show(idx + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+
   // Reveal on scroll
   var reveals = document.querySelectorAll('.reveal');
   if (location.hash === '#shot') { reveals.forEach(function (el) { el.classList.add('in'); }); return; }
