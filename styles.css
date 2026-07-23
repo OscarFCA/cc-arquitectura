@@ -101,18 +101,17 @@ section{padding-block:var(--section-gap)}
   transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
 }
 .nav.solid{background:var(--marfil);box-shadow:0 1px 0 rgba(11,29,52,.08);padding-block:12px}
-/* Logo enmarcado, versión sin fondo (blanco sobre hero, azul al hacer scroll) */
+/* Logo sin fondo ni marco (blanco sobre hero, azul al hacer scroll) */
 .nav-logo{
-  display:inline-flex;align-items:center;gap:.7rem;
-  border:1px solid currentColor;padding:7px 14px;
-  color:var(--marfil);transition:color .3s ease,border-color .3s ease;
+  display:inline-flex;align-items:baseline;gap:.7rem;
+  color:var(--marfil);transition:color .3s ease;
 }
 .nav.solid .nav-logo{color:var(--azul-profundo)}
-.nav-logo .cc{font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1;letter-spacing:.01em}
-.nav-logo .word{font-family:var(--sans);font-weight:500;font-size:.66rem;text-transform:uppercase;letter-spacing:.3em;padding-left:.1em}
+.nav-logo .cc{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1;letter-spacing:.01em}
+.nav-logo .word{font-family:var(--sans);font-weight:500;font-size:.66rem;text-transform:uppercase;letter-spacing:.3em}
 @media(max-width:480px){
-  .nav-logo{gap:.5rem;padding:6px 11px}
-  .nav-logo .cc{font-size:1.1rem}
+  .nav-logo{gap:.55rem}
+  .nav-logo .cc{font-size:1.2rem}
   .nav-logo .word{font-size:.56rem;letter-spacing:.24em}
 }
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;margin:0;padding:0}
