@@ -31,7 +31,7 @@
   // Hero video: reproducción más lenta y cinematográfica
   var heroVideo = document.querySelector('.hero-media video');
   if (heroVideo) {
-    var slow = function () { heroVideo.playbackRate = 0.5; };
+    var slow = function () { heroVideo.playbackRate = 0.7; };
     slow();
     heroVideo.addEventListener('loadedmetadata', slow);
     heroVideo.addEventListener('play', slow);
