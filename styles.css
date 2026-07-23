@@ -101,18 +101,16 @@ section{padding-block:var(--section-gap)}
   transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
 }
 .nav.solid{background:var(--marfil);box-shadow:0 1px 0 rgba(11,29,52,.08);padding-block:12px}
-/* Logo sin fondo ni marco (blanco sobre hero, azul al hacer scroll) */
-.nav-logo{
-  display:inline-flex;align-items:baseline;gap:.7rem;
-  color:var(--marfil);transition:color .3s ease;
-}
-.nav.solid .nav-logo{color:var(--azul-profundo)}
-.nav-logo .cc{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1;letter-spacing:.01em}
-.nav-logo .word{font-family:var(--sans);font-weight:500;font-size:.66rem;text-transform:uppercase;letter-spacing:.3em}
-@media(max-width:480px){
-  .nav-logo{gap:.55rem}
-  .nav-logo .cc{font-size:1.2rem}
-  .nav-logo .word{font-size:.56rem;letter-spacing:.24em}
+/* Logo de marca en el header: versión clara sobre el hero, azul al hacer scroll */
+.nav-logo{display:inline-flex;align-items:center}
+.nav-logo img{height:52px;width:auto;display:block}
+.nav-logo .logo-dark{display:none}
+.nav.solid .nav-logo .logo-light{display:none}
+.nav.solid .nav-logo .logo-dark{display:block}
+.nav.solid .nav-logo img{height:46px}
+@media(max-width:600px){
+  .nav-logo img{height:42px}
+  .nav.solid .nav-logo img{height:40px}
 }
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;margin:0;padding:0}
 .nav-links a{
